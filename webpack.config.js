@@ -3,10 +3,11 @@ const HTMLWebPackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
+    context: path.resolve(__dirname, 'src'), // указываем где лежат все исходники
     mode: 'development',
     entry: { // точки входя для webpack
-        main: './src/index.js',
-        analytics: './src/analytics.js'
+        main: './index.js',
+        analytics: './analytics.js'
     },
     output: { // куда будет сохранять результат
         // Так как входных файла два, то используем патерн NAME что бы вебпак автоматом подставил имена от входных файлов
@@ -16,7 +17,7 @@ module.exports = {
     },
     plugins: [
         new HTMLWebPackPlugin({
-            template: './src/index.html'
+            template: './index.html'
         }),
         new CleanWebpackPlugin()
     ]
