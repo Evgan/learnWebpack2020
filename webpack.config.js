@@ -26,7 +26,11 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|eot|ttf|otf|pdf|docx)$/,
-                use: ['file-loader']
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                    name: 'images/[hash].[ext]'
+                }
             }
         ]
     },

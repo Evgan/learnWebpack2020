@@ -1,5 +1,5 @@
 ### По видосу:
-https://youtu.be/eSaF8NXeNsA
+https://youtu.be/eSaF8NXeNsA ОСТАНОВИЛСЯ: 1:20
 
 ### Docs for webpack:
 https://webpack.js.org/
@@ -13,3 +13,6 @@ sass-loader
     sass-loader - позволяет вебпаку понимать подобные импорты файлов в js: import './ddd.scss'
     node-sass - позволяет быстро компилировать SASS в CSS.
     mini-css-extract-plugin - для извлечения css-файлов в отдельные файлы
+    
+    
+
