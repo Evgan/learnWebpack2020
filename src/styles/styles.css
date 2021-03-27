@@ -8,3 +8,11 @@ h1 {
     text-align: center;
     color: brown;
 }
+
+.flag {
+    background-image: url("../assets/flag.jpg");
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+}
