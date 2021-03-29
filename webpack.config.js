@@ -15,6 +15,18 @@ module.exports = {
       filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
     },
+    resolve: {
+        // extensions: ['.js', '.jsx', '.ts', '.tsx'] Данная настройка позволяет при импорте файла в файл не писать расширения файлов указанных в массиве
+
+        // Очень полезная штука, тип биндим путь к нужным папкам и потом можем юзать из любой вложенности
+        // ПРИМЕР, вместо этого: import actionExpl from '../../../../ducks/duckExpl'
+        // ПОЛУЧИМ: import actionExpl from '@models/duckExpl'
+        alias: {
+            //'@models' : path.resolve(__dirname, 'src/models');
+            //'@ducks': path.resolve(__dirname, 'src/client/redicer/ducks');
+            //'@': path.resolve(__dirname, 'src');
+        }
+    },
     module: {
         rules: [
             {
