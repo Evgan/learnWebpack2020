@@ -10,7 +10,7 @@ export default class Post {
             title: this.title,
             img: this.img,
             date: this.date
-        })
+        },  null, 2)
     }
 
     get newTitleUp() {
