@@ -46,7 +46,7 @@ module.exports = {
     mode: 'development',
     entry: { // точки входя для webpack
         main: ['@babel/polyfill', './index.js'],
-        analytics: './analytics.js'
+        analytics: './analytics.ts'
     },
     output: { // куда будет сохранять результат
         // Так как входных файла два, то используем патерн NAME что бы вебпак автоматом подставил имена от входных файлов
@@ -113,6 +113,16 @@ module.exports = {
                     loader: "babel-loader",
                     options: {
                         presets: ['@babel/preset-env']
+                    }
+                }
+            },
+            {
+                test: /\.ts$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-typescript']
                     }
                 }
             }
