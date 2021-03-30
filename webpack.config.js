@@ -29,6 +29,18 @@ const optimization = () => {
 // Что бы хэши были в PROD режиме
 const fileName = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
 
+// выносим повторяющийся код:
+const cssLoaders = extra => {
+    const loaders = [
+        MiniCssExtractPlugin.loader,
+        'css-loader',
+    ];
+    if (extra) {
+        loaders.push(extra);
+    }
+    return loaders;
+};
+
 module.exports = {
     context: path.resolve(__dirname, 'src'), // указываем где лежат все исходники
     mode: 'development',
@@ -66,19 +78,11 @@ module.exports = {
         rules: [
             {
               test: /\.s[ac]ss$/, // [ac] - означает что у нас будет ловить sAss и sCss
-              use: [
-                  MiniCssExtractPlugin.loader,
-                  'css-loader',
-                  'sass-loader'
-              ]
+              use: cssLoaders('sass-loader')
             },
             {
               test: /\.less$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'less-loader'
-                ]
+                use: cssLoaders('less-loader')
             },
             {
                 test: /\.css$/,
