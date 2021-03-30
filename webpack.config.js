@@ -2,6 +2,29 @@ const path = require('path');
 const HTMLWebPackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
+const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
+
+const isDev = process.env.NODE_ENV === 'development';
+const isProd = !isDev;
+console.log('-----------------------  process.env.NODE_ENV = ',  process.env.NODE_ENV);
+
+
+const optimization = () => {
+    const config = {
+        splitChunks: {
+            chunks: "all"
+        }
+    };
+    if (isProd) {
+        config.minimizer = [
+            new TerserWebpackPlugin(),
+            new CssMinimizerWebpackPlugin()
+        ];
+    }
+    return config;
+};
 
 module.exports = {
     context: path.resolve(__dirname, 'src'), // указываем где лежат все исходники
@@ -31,20 +54,23 @@ module.exports = {
     // Оптимизирует финальный бандел, к примеру мы импортируем в двух разных точках входа вешнюю библиотеку jquery,
     // и если не будет настройки chunks: "all", то для каждой точки входа в их бандлы добавится код этой блилиотеки (два раза одно и тоже будет записано)
     // Но если есть эта настройка то вебпак умный и этот потворяющий код вынесит в отдельный файли и будет юзать её ссылку в нужных бандлах
-    optimization: {
-        splitChunks: {
-            chunks: "all"
-        }
-    },
+    optimization: optimization(),
     devServer: {
-        port: 3005
+        port: 3005,
     },
     module: {
         rules: [
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader',
+                    {
+                        loader: MiniCssExtractPlugin.loader, // все стили пишит в итоговый отдельный css файл
+                        options: {
+                            // Если юзаем webpack 5 то HMR автоматически работает при webpack-dev-server
+                            // hmr: isDev, // (hot modal reloading) включаем эту опцию только для режима дев
+                            // reloadall: true
+                        }
+                    },
                     'css-loader'
                 ]
             },
@@ -60,7 +86,11 @@ module.exports = {
     },
     plugins: [
         new HTMLWebPackPlugin({
-            template: './index.html'
+            template: './index.html',
+            // что бы минимизировать билдовский стартовый html файл:
+            minify: {
+                collapseWhitespace: isProd
+            }
         }),
         new CleanWebpackPlugin(),
         new CopyWebpackPlugin({
@@ -70,6 +100,9 @@ module.exports = {
                     to: path.resolve(__dirname, 'dist')
                 },
             ]
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css'
         })
     ]
 };
