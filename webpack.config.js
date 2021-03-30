@@ -45,7 +45,7 @@ module.exports = {
     context: path.resolve(__dirname, 'src'), // указываем где лежат все исходники
     mode: 'development',
     entry: { // точки входя для webpack
-        main: './index.js',
+        main: ['@babel/polyfill', './index.js'],
         analytics: './analytics.js'
     },
     output: { // куда будет сохранять результат
@@ -104,6 +104,16 @@ module.exports = {
                 options: {
                     limit: 10000,
                     name: 'images/[hash].[ext]'
+                }
+            },
+            {
+                test: /\.m?js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
                 }
             }
         ]
