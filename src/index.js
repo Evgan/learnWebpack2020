@@ -1,6 +1,8 @@
 import * as $ from 'jquery';
 import Post from './Post';
 import './styles/styles.css';
+import './styles/less.less';
+import './styles/scss.scss';
 import json from './assets/testJson';
 import imgFlag from './assets/flag.jpg';
 

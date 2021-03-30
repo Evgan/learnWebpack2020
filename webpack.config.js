@@ -26,6 +26,9 @@ const optimization = () => {
     return config;
 };
 
+// Что бы хэши были в PROD режиме
+const fileName = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
+
 module.exports = {
     context: path.resolve(__dirname, 'src'), // указываем где лежат все исходники
     mode: 'development',
@@ -36,7 +39,8 @@ module.exports = {
     output: { // куда будет сохранять результат
         // Так как входных файла два, то используем патерн NAME что бы вебпак автоматом подставил имена от входных файлов
         // а contenthash в резульирующее имя файла хэш, что бы устранить кэширование
-      filename: '[name].[contenthash].js',
+      // filename: '[name].[contenthash].js',
+      filename: fileName('js'),  // Что бы хэши были в PROD режиме
       path: path.resolve(__dirname, 'dist')
     },
     resolve: {
@@ -60,6 +64,22 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+              test: /\.s[ac]ss$/, // [ac] - означает что у нас будет ловить sAss и sCss
+              use: [
+                  MiniCssExtractPlugin.loader,
+                  'css-loader',
+                  'sass-loader'
+              ]
+            },
+            {
+              test: /\.less$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'less-loader'
+                ]
+            },
             {
                 test: /\.css$/,
                 use: [
@@ -102,7 +122,8 @@ module.exports = {
             ]
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].[contenthash].css'
+            // filename: '[name].[contenthash].css'
+            filename: fileName('css') // Что бы хэши были в PROD режиме
         })
     ]
 };

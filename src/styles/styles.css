@@ -11,9 +11,13 @@ body {
     margin: 0 auto;
 }
 
+pre {
+    color: #cccccc;
+}
+
 h1 {
     text-align: center;
-    color: brown;
+    color: #a58d5e;
 }
 
 .flag {
