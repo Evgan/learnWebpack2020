@@ -85,6 +85,8 @@ module.exports = {
     devServer: {
         port: 3005,
     },
+    // что бы в инспекторе браузера в вкладке Sources отображался исходный код а не покасипоченый баббелам в нативный js
+    devtool: isDev ? 'source-map' : '',
     module: {
         rules: [
             {
