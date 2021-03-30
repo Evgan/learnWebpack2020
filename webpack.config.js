@@ -41,11 +41,22 @@ const cssLoaders = extra => {
     return loaders;
 };
 
+// выносим повторяющийся код:
+const babelOptions = preset => {
+    const result = {
+        presets: ['@babel/preset-env']
+    };
+    if(preset) {
+        result.presets.push(preset);
+    }
+    return result;
+};
+
 module.exports = {
     context: path.resolve(__dirname, 'src'), // указываем где лежат все исходники
     mode: 'development',
     entry: { // точки входя для webpack
-        main: ['@babel/polyfill', './index.js'],
+        main: ['@babel/polyfill', './index.jsx'],
         analytics: './analytics.ts'
     },
     output: { // куда будет сохранять результат
@@ -111,9 +122,7 @@ module.exports = {
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
+                    options: babelOptions()
                 }
             },
             {
@@ -121,9 +130,15 @@ module.exports = {
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-typescript']
-                    }
+                    options: babelOptions('@babel/preset-typescript')
+                }
+            },
+            {
+                test: /\.jsx$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: babelOptions('@babel/preset-react')
                 }
             }
         ]
