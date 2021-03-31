@@ -8,8 +8,6 @@ const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
-console.log('-----------------------  process.env.NODE_ENV = ', process.env.NODE_ENV);
-
 
 const optimization = () => {
     const config = {
@@ -27,7 +25,7 @@ const optimization = () => {
 };
 
 // Что бы хэши были в PROD режиме
-const fileName = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
+const fileName = ext => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
 
 // выносим повторяющийся код:
 const cssLoaders = extra => {
@@ -98,7 +96,7 @@ module.exports = {
         port: 3005,
     },
     // что бы в инспекторе браузера в вкладке Sources отображался исходный код а не покасипоченый баббелам в нативный js
-    devtool: isDev ? 'source-map' : '',
+    // devtool: isDev ? 'source-map' : '',
     module: {
         rules: [
             {
@@ -128,7 +126,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: 'images/[hash].[ext]'
+                    name: 'images/[contenthash].[ext]'
                 }
             },
             {
