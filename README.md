@@ -13,6 +13,11 @@ https://webpack.js.org/
 2) в webpack.config.js его читакм так:
 const isDev = process.env.NODE_ENV === 'development';
 
+### ESLint
+Что бы подсвечивался в редакторе нужно:
+Settings > Languages & Frameworcs > JavaScript > Code Quality Tools > ESLint
+указать путь для ESLint package: к \node_modules\eslint
+
 
 ### НА БУДУЩЕЕ:Настройка scss по:
 https://medium.com/@irooless/%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B0%D1%86%D0%B8%D1%8F-webpack-scss-f6208b621ecc

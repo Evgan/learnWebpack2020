@@ -8,7 +8,7 @@ const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
-console.log('-----------------------  process.env.NODE_ENV = ',  process.env.NODE_ENV);
+console.log('-----------------------  process.env.NODE_ENV = ', process.env.NODE_ENV);
 
 
 const optimization = () => {
@@ -39,6 +39,18 @@ const cssLoaders = extra => {
         loaders.push(extra);
     }
     return loaders;
+};
+
+// Что бы eslint прикрутить только в режиме дев
+const jsxLoader = () => {
+    const result = [{
+        loader: 'babel-loader',
+        options: babelOptions('@babel/preset-react')
+    }];
+    if (isDev) {
+        result.push('eslint-loader')
+    }
+    return result;
 };
 
 // выносим повторяющийся код:
@@ -138,10 +150,7 @@ module.exports = {
             {
                 test: /\.jsx$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: babelOptions('@babel/preset-react')
-                }
+                use: jsxLoader()
             }
         ]
     },

@@ -2,11 +2,11 @@ import React from 'react';
 import { render } from 'react-dom';
 import * as $ from 'jquery';
 import Post from './Post';
-import './babel'
+import './babel';
 import './styles/styles.css';
 import './styles/less.less';
 import './styles/scss.scss';
-import json from './assets/testJson';
+import json from './assets/testJson.json';
 import imgFlag from './assets/flag.jpg';
 
 const post = new Post('Мой пост 1', imgFlag);
@@ -21,7 +21,7 @@ const App = () => (
 
         <hr/>
 
-        <div className="flag"></div>
+        <div className="flag" />
 
         <hr/>
 
