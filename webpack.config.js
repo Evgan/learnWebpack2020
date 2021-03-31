@@ -62,7 +62,7 @@ const babelOptions = preset => {
     return result;
 };
 
-module.exports = {
+const config = {
     context: path.resolve(__dirname, 'src'), // указываем где лежат все исходники
     mode: 'development',
     entry: { // точки входя для webpack
@@ -95,8 +95,7 @@ module.exports = {
     devServer: {
         port: 3005,
     },
-    // что бы в инспекторе браузера в вкладке Sources отображался исходный код а не покасипоченый баббелам в нативный js
-    // devtool: isDev ? 'source-map' : '',
+
     module: {
         rules: [
             {
@@ -175,3 +174,10 @@ module.exports = {
         })
     ]
 };
+
+if (isDev) {
+    // что бы в инспекторе браузера в вкладке Sources отображался исходный код а не покасипоченый баббелам в нативный js
+    config.devtool = 'source-map';
+}
+
+module.exports = config;
