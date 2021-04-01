@@ -5,7 +5,7 @@ import Post from './Post';
 import './babel';
 import './styles/styles.css';
 import './styles/less.less';
-import './styles/scss.scss';
+import s from './styles/evganScssFile.scss';
 import json from './assets/testJson.json';
 import imgFlag from './assets/flag.jpg';
 
@@ -35,7 +35,7 @@ const App = () => (
 
         <hr/>
 
-        <div className="card">
+        <div className={s.card}>
             <h2>SCSS</h2>
         </div>
 

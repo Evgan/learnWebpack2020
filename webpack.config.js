@@ -105,7 +105,18 @@ const config = {
         rules: [
             {
                 test: /\.s[ac]ss$/, // [ac] - означает что у нас будет ловить sAss и sCss
-                use: cssLoaders('sass-loader')
+                // use: cssLoaders('sass-loader')
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true
+                        }
+                    },
+                    'postcss-loader',
+                    'sass-loader'
+                ]
             },
             {
                 test: /\.less$/,
