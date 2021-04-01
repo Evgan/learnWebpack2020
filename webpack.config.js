@@ -31,7 +31,8 @@ const fileName = (ext) => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}
 const cssLoaders = (extra) => {
     const loaders = [
         MiniCssExtractPlugin.loader,
-        'css-loader'
+        'css-loader',
+        'postcss-loader'
     ];
     if (extra) {
         loaders.push(extra);
