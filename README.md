@@ -31,12 +31,28 @@ https://youtu.be/SH6Y_MQzFVw?t=1897
         display: flex;
 
 
-### SCSS:
-
-css-loader - позволяет вебпаку понимать подобные импорты файлов в js: import './ddd.css'
-sass-loader - позволяет вебпаку понимать подобные импорты файлов в js: import './ddd.scss'
-node-sass - позволяет быстро компилировать SASS в CSS.
-mini-css-extract-plugin - для извлечения css-файлов в отдельные файлы
+### MODULES режим для css-loader c настройкой имени класса (localIdentName)
+что бы в результате в инспекторе браузера мы видели тип такого:
+<div class="evganScssFile__card___1WRni">
+(удобно потом понимать где что искать и решается проблема с дубликатами имен классов стилей)
+Иструкция здесь: https://github.com/webpack-contrib/css-loader#auto
+ 
+ 
+ module.exports = {
+   module: {
+     rules: [
+       {
+         test: /\.css$/i,
+         loader: "css-loader",
+         options: {
+           modules: {
+             localIdentName: "[path][name]__[local]--[hash:base64:5]",
+           },
+         },
+       },
+     ],
+   },
+ };
 
     
 
