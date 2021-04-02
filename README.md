@@ -1,6 +1,9 @@
 ### По видосу:
 https://youtu.be/eSaF8NXeNsA ОСТАНОВИЛСЯ: 1:20
 
+### + Статьяна хабре по Webpack 5 :
+https://habr.com/ru/post/524260/
+
 ### Docs for webpack:
 https://webpack.js.org/
 

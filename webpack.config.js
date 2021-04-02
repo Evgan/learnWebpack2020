@@ -79,8 +79,8 @@ const config = {
         path: path.resolve(__dirname, 'dist')
     },
     resolve: {
-        // extensions: ['.js', '.jsx', '.ts', '.tsx'] Данная настройка позволяет при импорте файла
-        // в файл не писать расширения файлов указанных в массиве
+        // Данная настройка позволяет при импорте файла в файл не писать расширения файлов указанных в массиве
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
 
         // Очень полезная штука, тип биндим путь к нужным папкам и потом можем юзать из любой вложенности
         // ПРИМЕР, вместо этого: import actionExpl from '../../../../ducks/duckExpl'
@@ -100,7 +100,7 @@ const config = {
     devServer: {
         port: 3005
     },
-
+    target: isDev ? 'web' : 'browserslist',
     module: {
         rules: [
             {
@@ -141,6 +141,8 @@ const config = {
             {
                 test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|eot|ttf|otf|pdf|docx)$/,
                 loader: 'url-loader',
+                // test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+                // type: 'asset/resource', // встроенныый загрузчик для работы со статическими файлами
                 options: {
                     limit: 10000,
                     name: 'images/[contenthash].[ext]'
