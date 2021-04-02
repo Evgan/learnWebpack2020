@@ -10,6 +10,10 @@ import json from './assets/testJson.json';
 import imgFlag from './assets/flag.jpg';
 import TestJsxComponent from './Components/TestJsxComponent';
 
+if (module.hot) {
+    module.hot.accept();
+}
+
 const post = new Post('Мой пост 1', imgFlag);
 $('pre').html(post.toString());
 console.log('-----------------------post.toString > ', post.toString());
@@ -18,7 +22,7 @@ console.log(json);
 
 const App = () => (
     <div className="container">
-        <h1>Изучаю Webpack 5</h1>
+        <h1>Изучаю Webpack 3</h1>
 
         <hr/>
 

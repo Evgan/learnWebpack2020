@@ -6,7 +6,7 @@ class TestJsxComponent extends Component {
     render() {
         return (
             <div className={s.content}>
-                TEST JSX COMPONENT 3
+                TEST JSX COMPONENT 4
             </div>
         );
     }
