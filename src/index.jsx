@@ -5,7 +5,7 @@ import Post from './Post';
 import './babel';
 import './styles/styles.css';
 import './styles/less.less';
-import s from './styles/evganScssFile.scss';
+import s from './styles/evganScssFile.module.scss';
 import json from './assets/testJson.json';
 import imgFlag from './assets/flag.jpg';
 import TestJsxComponent from './Components/TestJsxComponent';
@@ -21,12 +21,12 @@ console.log('----------------------- json:');
 console.log(json);
 
 const App = () => (
-    <div className="container">
-        <h1>Изучаю Webpack 3</h1>
+    <div className='container'>
+        <h1>Изучаю Webpack 4</h1>
 
         <hr/>
 
-        <div className="flag" />
+        <div className='flag' />
 
         <hr/>
 
@@ -34,7 +34,7 @@ const App = () => (
 
         <hr/>
 
-        <div className="box">
+        <div className='box'>
             <h2>LESS</h2>
         </div>
 
@@ -46,7 +46,7 @@ const App = () => (
 
         <hr/>
 
-        <TestJsxComponent/>
+        <TestJsxComponent />
 
     </div>
 );

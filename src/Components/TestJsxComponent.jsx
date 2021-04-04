@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import s from './TestJsxComponent.scss';
+import './TestJsxComponent.scss';
 
-class TestJsxComponent extends Component {
-    render() {
-        return (
-            <div className={s.content}>
-                TEST JSX COMPONENT 4
-            </div>
-        );
-    }
-}
+const TestJsxComponent = () => (
+    <div className='content'>
+        TEST JSX COMPONENT 2
+    </div>
+);
 
 export default TestJsxComponent;

@@ -100,22 +100,38 @@ const config = {
     devServer: {
         port: 3005
     },
-    target: isDev ? 'web' : 'browserslist',
+    // target: isDev ? 'web' : 'browserslist',
     module: {
         rules: [
             {
-                test: /\.s[ac]ss$/, // [ac] - означает что у нас будет ловить sAss и sCss
+                test: /\.module\.s[ac]ss$/,
+                // [ac] - означает что у нас будет ловить sAss и sCss
+                // Добавили метку \.module, что бы модульными были только наши файлы стилей еторые будут оканчиаться
+                // на module.scss и module.sass. Иначе, в случаи импорта внешней библиотеки с стилями (например bootstrap) их файлом
+                // стеилей так же примениться данное изменение нейминга, что может его сломать
+
                 // use: cssLoaders('sass-loader')
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: {
+                            importLoaders: 2,
                             modules: {
                                 localIdentName: '[name]__[local]___[hash:base64:5]'
                             }
                         }
                     },
+                    'postcss-loader',
+                    'sass-loader'
+                ]
+            },
+            {
+                test: /^((?!\.module).)*s[ac]ss$/, // все которые не заканчиваются на module.scss и module.sass
+                // use: cssLoaders('sass-loader')
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
                     'postcss-loader',
                     'sass-loader'
                 ]
